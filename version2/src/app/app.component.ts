@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-
-import { AngularFirestore } from 'angularfire2/firestore';
-import { Observable } from 'rxjs/Observable';
+import { AuthService } from './auth.service';
+import { Router } from '@angular/router';
+import { UserService } from './user.service';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +9,13 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
-  items: Observable <any[]>;
-  constructor(db: AngularFirestore){
-    this.items = db.collection('items').valueChanges();
+  constructor(private userService: UserService,private auth: AuthService, router: Router){
+    auth.user$.subscribe(user => {
+      if (user){
+        userService.save(user);
+        let returnUrl = localStorage.getItem('returnUrl');
+        router.navigateByUrl(returnUrl);
+      }
+    });
   }
 }
