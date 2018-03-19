@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { AppComponent } from './app.component';
 
 import { AngularFireModule } from 'angularfire2';
@@ -11,12 +12,14 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 
 import { environment } from '../environments/environment';
+import { FeaturedCarouselComponent } from './featured-carousel/featured-carousel.component';
 
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FeaturedCarouselComponent
   ],
   imports: [
     BrowserModule,
@@ -25,6 +28,7 @@ import { environment } from '../environments/environment';
     AngularFireAuthModule,
     AngularFireStorageModule,
     BsDropdownModule.forRoot(),
+    NgbModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
